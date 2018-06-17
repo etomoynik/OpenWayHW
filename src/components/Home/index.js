@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import withAuthorization from '../Session/withAuthorization';
 import { db } from '../../firebase';
+import Profile from './profile';
+
 
 class HomePage extends Component {
   constructor(props) {
@@ -13,32 +15,31 @@ class HomePage extends Component {
   }
 
   componentDidMount() {
-    db.onceGetUsers().then(snapshot =>
-      this.setState(() => ({ users: snapshot.val() }))
+    db.onceGetForms().then(snapshot =>
+      this.setState(() => ({ forms: snapshot.val() }))
     );
   }
 
   render() {
-    const { users } = this.state;
-
+    const { forms } = this.state;
+    console.log(this.state)
     return (
       <div>
-        <h1>Home</h1>
-        <p>The Home Page is accessible by every signed in user.</p>
-
-        { !!users && <UserList users={users} /> }
+        { !!forms && <UserList forms={forms} /> }
       </div>
     );
   }
 }
 
-const UserList = ({ users }) =>
+const UserList = ({ forms }) =>
   <div>
-    <h2>List of Usernames of Users</h2>
-    <p>(Saved on Sign Up in Firebase Database)</p>
+    <h2>Заявки:</h2>
 
-    {Object.keys(users).map(key =>
-      <div key={key}>{users[key].username}</div>
+    {Object.keys(forms).map(key =>
+      <Profile
+        key={key}
+        profile = {forms[key].form}
+      />
     )}
   </div>
 

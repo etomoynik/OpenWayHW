@@ -11,4 +11,13 @@ export const doCreateUser = (id, username, email) =>
 export const onceGetUsers = () =>
   db.ref('users').once('value');
 
+export const onceGetForms = () =>
+  db.ref('forms').once('value');
+
+export const onceGetForm = () =>
+  db.ref('forms').once('value');
+
+export const submitForm = (form) =>
+  db.ref(`forms/${form.email}`).set({form});
+
 // Other db APIs ...

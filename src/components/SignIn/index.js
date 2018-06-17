@@ -8,7 +8,7 @@ import * as routes from '../../constants/routes';
 
 const SignInPage = ({ history }) =>
   <div>
-    <h1>SignIn</h1>
+    <h1>Вход для администраторов</h1>
     <SignInForm history={history} />
     <PasswordForgetLink />
     <SignUpLink />
@@ -70,7 +70,7 @@ class SignInForm extends Component {
           value={email}
           onChange={event => this.setState(updateByPropertyName('email', event.target.value))}
           type="text"
-          placeholder="Email Address"
+          placeholder="Email"
         />
         <input
           value={password}
@@ -79,7 +79,7 @@ class SignInForm extends Component {
           placeholder="Password"
         />
         <button disabled={isInvalid} type="submit">
-          Sign In
+          Вход
         </button>
 
         { error && <p>{error.message}</p> }
